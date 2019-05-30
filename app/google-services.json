@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "120219702773",
+    "firebase_url": "https://chat-app-87100.firebaseio.com",
+    "project_id": "chat-app-87100",
+    "storage_bucket": "chat-app-87100.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120219702773:android:cf6cfb7ed875c32d",
+        "android_client_info": {
+          "package_name": "edu.kokhan.simplechat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120219702773-6do81bi0gbi2t7cdocpkc41r2dko5f1k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.kokhan.simplechat",
+            "certificate_hash": "2be8183ce0640751e56dd8c776ef411375a43661"
+          }
+        },
+        {
+          "client_id": "120219702773-l8gv2u95du1e0lc0j5hf76l38fmv33s1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqkABVMC_P0SW8u7NB5BsnfqFw_cfJhVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120219702773-l8gv2u95du1e0lc0j5hf76l38fmv33s1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
