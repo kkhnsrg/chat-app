@@ -8,11 +8,11 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_chat.*
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class ChatActivity : AppCompatActivity() {
 
     private val database = FirebaseDatabase.getInstance()
     private val messagesRef = database.getReference("messages")
@@ -22,19 +22,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_chat)
+
+        val username = intent.getStringExtra("USERNAME")
 
         val adapter = MessagesAdapter(this, messages)
         messagesRecyclerView.layoutManager = LinearLayoutManager(this)
         messagesRecyclerView.adapter = adapter
 
-        button.setOnClickListener {
+        sendMessageButton.setOnClickListener {
             val message = editTextMessage.text.toString()
 
             if(!messageIsCorrect(message)) return@setOnClickListener
 
             //TODO message object
-            messagesRef.push().setValue(Message(message, "Sergey"))
+            messagesRef.push().setValue(Message(message, username))
             editTextMessage.setText("")
         }
 

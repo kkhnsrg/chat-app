@@ -29,7 +29,7 @@ class MessagesAdapter(context: Context, var messages: ArrayList<Message>) :
         val element = messages[position]
         holder.message!!.text = element.textMessage
         holder.name!!.text = element.author
-        holder.time!!.text = DateFormat.format("dd=MM-yyy (HH:mm:ss)", element.timeMessage)
+        holder.time!!.text = DateFormat.format("dd.MM.yyy (HH:mm:ss)", element.timeMessage)
     }
 
     class SpecialViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
