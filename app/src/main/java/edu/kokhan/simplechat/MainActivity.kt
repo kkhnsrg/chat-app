@@ -2,9 +2,14 @@ package edu.kokhan.simplechat
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -13,18 +18,48 @@ class MainActivity : AppCompatActivity() {
     private val messagesRef = database.getReference("messages")
     private val MAX_MESSAGE_LENGTH = 150
 
+    val messages = ArrayList<Message>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val adapter = MessagesAdapter(this, messages)
+        messagesRecyclerView.layoutManager = LinearLayoutManager(this)
+        messagesRecyclerView.adapter = adapter
 
         button.setOnClickListener {
             val message = editTextMessage.text.toString()
 
             if(!messageIsCorrect(message)) return@setOnClickListener
 
-            messagesRef.push().setValue(message)
+            //TODO message object
+            messagesRef.push().setValue(Message(message, "Sergey"))
             editTextMessage.setText("")
         }
+
+        messagesRef.addChildEventListener(
+            object: ChildEventListener {
+                override fun onChildAdded(dataSnapshot: DataSnapshot, s: String?) {
+                    val element = dataSnapshot.getValue(Message::class.java)
+                    messages.add(element!!)
+                    adapter.notifyDataSetChanged()
+                    messagesRecyclerView.smoothScrollToPosition(messages.size)
+
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                }
+
+                override fun onChildMoved(dataSnapshot: DataSnapshot, s: String?) {
+                }
+
+                override fun onChildChanged(dataSnapshot: DataSnapshot, s: String?) {
+                }
+
+                override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                }
+            }
+        )
     }
 
     private fun messageIsCorrect(message: String): Boolean {
@@ -41,6 +76,4 @@ class MainActivity : AppCompatActivity() {
 
         return correctResult
     }
-
-
 }

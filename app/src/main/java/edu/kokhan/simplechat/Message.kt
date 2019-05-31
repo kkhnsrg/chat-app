@@ -1,14 +1,15 @@
 package edu.kokhan.simplechat
 
+import java.util.*
+
 class Message{
 
-    constructor() {
-    }
+    constructor()
 
-    constructor(textMessage: String, author: String, timeMessage: Long) {
+    constructor(textMessage: String, author: String) {
         this.textMessage = textMessage
         this.author = author
-        this.timeMessage = timeMessage
+        this.timeMessage = Date().time
     }
 
     var textMessage: String = ""
