@@ -19,7 +19,7 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textPersonName"
+                android:id="@+id/editTextMessage"
                 android:hint="@string/input_message_here"/>
 
         <Button
