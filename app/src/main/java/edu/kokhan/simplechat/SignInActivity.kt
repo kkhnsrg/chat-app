@@ -15,7 +15,6 @@ class SignInActivity : AppCompatActivity() {
     private val usersRef = database.getReference("users")
     private val users = ArrayList<UserCredentials>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -58,8 +57,19 @@ class SignInActivity : AppCompatActivity() {
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "Incorrect credentials!", Toast.LENGTH_SHORT).show()
+                clearCredentialsFields()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        clearCredentialsFields()
+    }
+
+    private fun clearCredentialsFields(){
+        editTextLogin.setText("")
+        editTextPass.setText("")
     }
 
 }
