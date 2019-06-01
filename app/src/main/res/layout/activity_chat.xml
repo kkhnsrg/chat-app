@@ -30,6 +30,7 @@
                 android:background="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:fontFamily="sans-serif"
+                android:textColor="#FFFFFF"
                 android:text="@string/send"/>
     </LinearLayout>
 

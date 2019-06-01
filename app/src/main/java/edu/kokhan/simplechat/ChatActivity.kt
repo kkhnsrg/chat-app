@@ -3,6 +3,8 @@ package edu.kokhan.simplechat
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -61,6 +63,18 @@ class ChatActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId == R.id.menu_signout){
+            onBackPressed()
+        }
+        return true
     }
 
     private fun messageIsCorrect(message: String): Boolean {
