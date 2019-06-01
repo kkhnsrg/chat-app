@@ -11,7 +11,6 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_chat.*
 import java.util.*
 
-
 class ChatActivity : AppCompatActivity() {
 
     private val database = FirebaseDatabase.getInstance()
@@ -23,6 +22,7 @@ class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+        messagesRecyclerView.smoothScrollToPosition(messages.size)
 
         val username = intent.getStringExtra("USERNAME")
 
@@ -33,22 +33,21 @@ class ChatActivity : AppCompatActivity() {
         sendMessageButton.setOnClickListener {
             val message = editTextMessage.text.toString()
 
-            if(!messageIsCorrect(message)) return@setOnClickListener
+            if (!messageIsCorrect(message)) return@setOnClickListener
 
-            //TODO message object
             messagesRef.push().setValue(Message(message, username))
             editTextMessage.setText("")
         }
 
         messagesRef.addChildEventListener(
-            object: ChildEventListener {
+            object : ChildEventListener {
                 override fun onChildAdded(dataSnapshot: DataSnapshot, s: String?) {
                     val element = dataSnapshot.getValue(Message::class.java)
                     messages.add(element!!)
                     adapter.notifyDataSetChanged()
                     messagesRecyclerView.smoothScrollToPosition(messages.size)
-
                 }
+
                 override fun onCancelled(databaseError: DatabaseError) {
                 }
 
@@ -72,7 +71,11 @@ class ChatActivity : AppCompatActivity() {
         }
 
         if (message.length > MAX_MESSAGE_LENGTH) {
-            Toast.makeText(this, "Message text cannot contains more than $MAX_MESSAGE_LENGTH symbols!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                "Message text cannot contains more than $MAX_MESSAGE_LENGTH symbols!",
+                Toast.LENGTH_SHORT
+            ).show()
             correctResult = false
         }
 

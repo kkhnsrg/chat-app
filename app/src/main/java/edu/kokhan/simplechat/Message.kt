@@ -2,7 +2,7 @@ package edu.kokhan.simplechat
 
 import java.util.*
 
-class Message{
+class Message {
 
     constructor()
 

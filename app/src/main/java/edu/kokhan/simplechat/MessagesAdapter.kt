@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.text.format.DateFormat
 import java.util.ArrayList
 
-
 class MessagesAdapter(context: Context, var messages: ArrayList<Message>) :
     RecyclerView.Adapter<MessagesAdapter.SpecialViewHolder>() {
 
