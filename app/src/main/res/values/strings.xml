@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Simple Chat</string>
+    <string name="app_name">SimChat</string>
     <string name="input_message_here">Input message here</string>
     <string name="send">Send</string>
     <string name="title_activity_login">Sign in</string>
