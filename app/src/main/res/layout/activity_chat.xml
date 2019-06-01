@@ -11,7 +11,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/messagesRecyclerView"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/chat_background"/>
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,6 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/sendMessageButton"
+                android:background="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
                 android:text="@string/send"/>
     </LinearLayout>
 
