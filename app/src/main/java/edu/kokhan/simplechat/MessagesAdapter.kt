@@ -10,10 +10,10 @@ import android.widget.TextView
 import android.text.format.DateFormat
 import java.util.ArrayList
 
-class MessagesAdapter(context: Context, var messages: ArrayList<Message>) :
+class MessagesAdapter(context: Context, private var messages: ArrayList<Message>) :
     RecyclerView.Adapter<MessagesAdapter.SpecialViewHolder>() {
 
-    var layoutInflater: LayoutInflater = LayoutInflater.from(context)
+    private var layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialViewHolder {
         val view = layoutInflater.inflate(R.layout.item_message, parent, false)

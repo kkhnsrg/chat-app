@@ -2,6 +2,7 @@ package edu.kokhan.simplechat
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
@@ -17,7 +18,7 @@ class ChatActivity : AppCompatActivity() {
 
     private val database = FirebaseDatabase.getInstance()
     private val messagesRef = database.getReference("messages")
-    private val MAX_MESSAGE_LENGTH = 150
+    private val MAX_MESSAGE_LENGTH = 666
 
     val messages = ArrayList<Message>()
 
@@ -71,9 +72,7 @@ class ChatActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item!!.itemId == R.id.menu_signout){
-            onBackPressed()
-        }
+        if (item!!.itemId == R.id.menu_signout) onBackPressed()
         return true
     }
 
@@ -94,5 +93,21 @@ class ChatActivity : AppCompatActivity() {
         }
 
         return correctResult
+    }
+
+    override fun onBackPressed() {
+        logoutAlert()
+    }
+
+    private fun logoutAlert() {
+        val builder = AlertDialog.Builder(this)
+
+        with(builder) {
+            setTitle("Logout")
+            setMessage("Are you sure?")
+            setPositiveButton(android.R.string.yes) { _, _ -> finish() }
+            setNegativeButton(android.R.string.no) { dialog, _ -> dialog.cancel() }
+        }
+        builder.show()
     }
 }
