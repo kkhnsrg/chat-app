@@ -25,45 +25,14 @@ class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-        messagesRecyclerView.smoothScrollToPosition(messages.size)
-
-        val username = intent.getStringExtra("USERNAME")
-
+//        messagesRecyclerView.scrollToPosition(messages.size)//scrollToPosition(messages.size)
         val adapter = MessagesAdapter(this, messages)
-        messagesRecyclerView.layoutManager = LinearLayoutManager(this)
+        setupListeners(adapter)
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.stackFromEnd = true
+        messagesRecyclerView.layoutManager = layoutManager
         messagesRecyclerView.adapter = adapter
 
-        sendMessageButton.setOnClickListener {
-            val message = editTextMessage.text.toString()
-
-            if (!messageIsCorrect(message)) return@setOnClickListener
-
-            messagesRef.push().setValue(Message(message, username))
-            editTextMessage.setText("")
-        }
-
-        messagesRef.addChildEventListener(
-            object : ChildEventListener {
-                override fun onChildAdded(dataSnapshot: DataSnapshot, s: String?) {
-                    val element = dataSnapshot.getValue(Message::class.java)
-                    messages.add(element!!)
-                    adapter.notifyDataSetChanged()
-                    messagesRecyclerView.smoothScrollToPosition(messages.size)
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                }
-
-                override fun onChildMoved(dataSnapshot: DataSnapshot, s: String?) {
-                }
-
-                override fun onChildChanged(dataSnapshot: DataSnapshot, s: String?) {
-                }
-
-                override fun onChildRemoved(dataSnapshot: DataSnapshot) {
-                }
-            }
-        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -109,5 +78,41 @@ class ChatActivity : AppCompatActivity() {
             setNegativeButton(android.R.string.no) { dialog, _ -> dialog.cancel() }
         }
         builder.show()
+    }
+
+    private fun setupListeners(adapter: MessagesAdapter){
+        val username = intent.getStringExtra("USERNAME")
+
+        sendMessageButton.setOnClickListener {
+            val message = editTextMessage.text.toString()
+
+            if (!messageIsCorrect(message)) return@setOnClickListener
+
+            messagesRef.push().setValue(Message(message, username))
+            editTextMessage.setText("")
+        }
+
+        messagesRef.addChildEventListener(
+            object : ChildEventListener {
+                override fun onChildAdded(dataSnapshot: DataSnapshot, s: String?) {
+                    val element = dataSnapshot.getValue(Message::class.java)
+                    messages.add(element!!)
+                    adapter.notifyDataSetChanged()
+                    messagesRecyclerView.smoothScrollToPosition(messages.size)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                }
+
+                override fun onChildMoved(dataSnapshot: DataSnapshot, s: String?) {
+                }
+
+                override fun onChildChanged(dataSnapshot: DataSnapshot, s: String?) {
+                }
+
+                override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                }
+            }
+        )
     }
 }
