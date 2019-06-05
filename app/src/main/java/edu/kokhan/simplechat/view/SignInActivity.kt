@@ -1,4 +1,4 @@
-package edu.kokhan.simplechat
+package edu.kokhan.simplechat.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,8 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 import android.content.Intent
 import android.widget.Toast
 import com.google.firebase.database.*
+import edu.kokhan.simplechat.R
+import edu.kokhan.simplechat.model.UserCredentials
 import java.util.ArrayList
 
 

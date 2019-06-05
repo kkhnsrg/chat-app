@@ -1,4 +1,4 @@
-package edu.kokhan.simplechat
+package edu.kokhan.simplechat.model
 
 import java.util.*
 
