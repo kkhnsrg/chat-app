@@ -20,7 +20,6 @@ class ChatActivity : AppCompatActivity(), ChatPresenter.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_chat)
         setContentView(R.layout.activity_chat)
         setupListeners()
 
@@ -59,9 +58,7 @@ class ChatActivity : AppCompatActivity(), ChatPresenter.View {
         val username = intent.getStringExtra("USERNAME")
         sendMessageButton.setOnClickListener {
             val message = editTextMessage.text.toString()
-            if (!presenter.messageIsCorrect(message)) return@setOnClickListener
             presenter.sendNewMessage(message, username)
-            editTextMessage.setText("")
         }
     }
 
@@ -80,5 +77,9 @@ class ChatActivity : AppCompatActivity(), ChatPresenter.View {
             "Message text cannot contains more than ${presenter.MAX_MESSAGE_LENGTH} symbols!",
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    override fun clearMessageInput() {
+        editTextMessage.setText("")
     }
 }

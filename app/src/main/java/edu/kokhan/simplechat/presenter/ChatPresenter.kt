@@ -1,37 +1,36 @@
 package edu.kokhan.simplechat.presenter
 
-import android.widget.Toast
 import edu.kokhan.simplechat.model.Message
 import java.util.*
 
-class ChatPresenter(private val mView: View) {
+class ChatPresenter(private val view: View) {
 
     val MAX_MESSAGE_LENGTH = 666
 
     private val interactor: ChatInteractor = ChatInteractor(this)
 
     fun sendNewMessage(message: String, username: String) {
-        val chatMessage = Message(message, username)
-
-        interactor.sendNewMessageToChat(chatMessage)
+        if(messageIsCorrect(message)) {
+            val chatMessage = Message(message, username)
+            interactor.sendNewMessageToChat(chatMessage)
+            view.clearMessageInput()
+        }
     }
 
     fun refreshCurrentChatList(currentChatMessage: ArrayList<Message>) {
-        mView.refreshCurrentChatList(currentChatMessage)
+        view.refreshCurrentChatList(currentChatMessage)
     }
 
-    fun messageIsCorrect(message: String): Boolean {
+    private fun messageIsCorrect(message: String): Boolean {
         var correctResult = true
         if (message == "") {
-            mView.showEmptyInputMessage()
+            view.showEmptyInputMessage()
             correctResult = false
         }
-
         if (message.length > MAX_MESSAGE_LENGTH) {
-            mView.showLargeInputMessage()
+            view.showLargeInputMessage()
             correctResult = false
         }
-
         return correctResult
     }
 
@@ -39,5 +38,6 @@ class ChatPresenter(private val mView: View) {
         fun refreshCurrentChatList(currentChatMessage: ArrayList<Message>)
         fun showEmptyInputMessage()
         fun showLargeInputMessage()
+        fun clearMessageInput()
     }
 }
