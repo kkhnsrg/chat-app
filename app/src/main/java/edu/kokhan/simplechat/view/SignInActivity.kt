@@ -17,27 +17,6 @@ class SignInActivity : AppCompatActivity(), SignInPresenter.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-//        usersRef.addChildEventListener(
-//            object : ChildEventListener {
-//                override fun onChildAdded(dataSnapshot: DataSnapshot, s: String?) {
-//                    val element = dataSnapshot.getValue(UserCredentials::class.java)
-//                    users.add(element!!)
-//                }
-//
-//                override fun onCancelled(databaseError: DatabaseError) {
-//                }
-//
-//                override fun onChildMoved(dataSnapshot: DataSnapshot, s: String?) {
-//                }
-//
-//                override fun onChildChanged(dataSnapshot: DataSnapshot, s: String?) {
-//                }
-//
-//                override fun onChildRemoved(dataSnapshot: DataSnapshot) {
-//                }
-//            }
-//        )
-
         signInButton.setOnClickListener {
             val username = editTextLogin.text.toString()
             val password = editTextPass.text.toString()

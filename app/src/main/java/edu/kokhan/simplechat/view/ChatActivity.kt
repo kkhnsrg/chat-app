@@ -21,7 +21,12 @@ class ChatActivity : AppCompatActivity(), ChatPresenter.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-        setupListeners()
+
+        val username = intent.getStringExtra("USERNAME")
+        sendMessageButton.setOnClickListener {
+            val message = editTextMessage.text.toString()
+            presenter.sendNewMessage(message, username)
+        }
 
         refreshCurrentChatList(messages)
         val layoutManager = LinearLayoutManager(this)
@@ -52,14 +57,6 @@ class ChatActivity : AppCompatActivity(), ChatPresenter.View {
             setNegativeButton(android.R.string.no) { dialog, _ -> dialog.cancel() }
         }
         builder.show()
-    }
-
-    private fun setupListeners() {
-        val username = intent.getStringExtra("USERNAME")
-        sendMessageButton.setOnClickListener {
-            val message = editTextMessage.text.toString()
-            presenter.sendNewMessage(message, username)
-        }
     }
 
     override fun refreshCurrentChatList(currentChatMessage: ArrayList<Message>) {

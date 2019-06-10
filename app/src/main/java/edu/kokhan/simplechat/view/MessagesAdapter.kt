@@ -2,15 +2,15 @@ package edu.kokhan.simplechat.view
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.item_message.view.*
 import android.widget.TextView
-import android.text.format.DateFormat
 import edu.kokhan.simplechat.R
 import edu.kokhan.simplechat.model.Message
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.item_message.view.*
+import java.util.*
 
 class MessagesAdapter(context: Context, private var messages: ArrayList<Message>) :
     RecyclerView.Adapter<MessagesAdapter.SpecialViewHolder>() {
